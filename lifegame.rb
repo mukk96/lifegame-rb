@@ -15,9 +15,9 @@ class Field
 
   def clear
     @lines = []
-    (0..@height).each do |y|
+    (0...@height).each do |y|
       line = []
-      (0..@width).each do |x|
+      (0...@width).each do |x|
         line.append(false)
       end
       @lines.append(line)
@@ -25,8 +25,8 @@ class Field
   end    
 
   def randomize
-    (1..@height-1).each do |y|
-      (1..@width-1).each do |x|
+    (1...@height-1).each do |y|
+      (1...@width-1).each do |x|
         if rand(5) % 5 == 0
           @lines[y][x] = true
         else
@@ -37,8 +37,8 @@ class Field
   end
 
   def view
-    (0..@height).each do |y|
-      (0..@width).each do |x|
+    (0...@height).each do |y|
+      (0...@width).each do |x|
         Ncurses.move(y, x)
         if @lines[y][x] == true
           Ncurses.addstr("*")
@@ -53,16 +53,16 @@ class Field
   def next_generation
     # make empty field
     next_lines = []
-    (0..@height).each do |y|
+    (0...@height).each do |y|
       line = []
-      (0..@width).each do |x|
+      (0...@width).each do |x|
         line.append(false)
       end
       next_lines.append(line)
     end
     
-    (1..@height-1).each do |y|
-      (1..@width-1).each do |x|
+    (1...@height-1).each do |y|
+      (1...@width-1).each do |x|
         next_lines[y][x] = judge(y, x)
       end
     end
@@ -118,5 +118,4 @@ rescue
 ensure
   Ncurses.endwin
 end
-
 
